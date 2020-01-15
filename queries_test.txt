@@ -1,0 +1,31 @@
+tbl_user
+
+insert INTO tbl_user (App_id,User_id,Role_id,User_name,User_password,User_email,User_mobileno,User_securityqn,User_answer,User_lastvisitdate,User_resetdate,User_resetcount,User_status,User_statusdate,Remarks,Created_userid,Regtime)  values ('12','1','1','Yash','202cb962ac59075b964b07152d234b70','yash@gmail.com','7020963749','Yash','Yash','2018-12-01 16:05:05','2018-12-01 16:05:05',2,'Status','2018-12-01 16:05:05','None','today','2018-12-01 16:05:05'),
+('12','2','1','Ved','202cb962ac59075b964b07152d234b70','ved@gmail.com','7020963749','Yash','Yash','2018-12-01 16:05:05','2018-12-01 16:05:05',2,'Status','2018-12-01 16:05:05','None','today','2018-12-01 16:05:05'),
+('12','3','1','Anish','202cb962ac59075b964b07152d234b70','anish@gmail.com','7020963749','Yash','Yash','2018-12-01 16:05:05','2018-12-01 16:05:05',2,'Status','2018-12-01 16:05:05','None','today','2018-12-01 16:05:05'),
+('12','4','1','Onkar','202cb962ac59075b964b07152d234b70','onkar@gmail.com','7020963749','Yash','Yash','2018-12-01 16:05:05','2018-12-01 16:05:05',2,'Status','2018-12-01 16:05:05','None','today','2018-12-01 16:05:05');
+
+
+tbl_role
+
+INSERT INTO `tbl_roles`(`App_id`, `Role_id`, `Role_name`, `Role_description`, `Remarks`, `User_id`, `Regtime`) VALUES ('12','#ST#','Student','None','None','1','2018-12-01 16:05:05')
+
+
+create table tbl_lib_books(book_id int(30) PRIMARY key AUTO_INCREMENT, title varchar(300), author varchar(300),publisher varchar(300),book_added timestamp,sem_id int(30), user_id varchar(200), first_flag_id int(30),bill_no int(30))
+
+create TABLE tbl_lib_order (order_id int(10),order_sequence int(10),role_id varchar(20),status_of_approval varchar(10),resubmit_provsion varchar(10),book_conversion_record_id int(30));
+
+create TABLE tbl_lib_bills (bill_id int(30),book_id int(30),bill_no varchar(200),bill_date date,amount int(7),upload_timestamp timestamp,bill_location varchar(500));
+
+
+create TABLE tbl_lib_flag (flag_id int(30),book_id int(30),status_of_approval varchar(20),Remarks varchar(200), next_flag_id int(30), first_resubmit_id int(30), flag_timestamp timestamp,user_id varchar(200))
+
+CREATE TABLE tbl_book_category(category_name varchar(200),book_cat_id int(10),status_of_activeness varchar(10),allowed_balance int(7));
+
+CREATE TABLE tbl_lib_resubmit(resubmit_id int(30),title varchar(300),author varchar(300),publisher varchar(200),faculty_id varchar(200),bill_id int(30),next_resubmit_id int(30));
+
+CREATE TABLE tbl_lib_user_category(user_book_cat_id int(30),user_id varchar(200),next_cat_id int(30),available_balance int(7),sem_id int(30));
+
+CREATE TABLE tbl_lib_book_conversion(cat_id_1 int(30),cat_id_2 int(30), conversion_id int(10),status_of_activation varchar(10));
+
+CREATE TABLE tbl_lib_book_conversion_record(book_id int(30),user_id varchar(200),conversion_id int(10),amount_borrowed int(7),conversion_record_id int(30));

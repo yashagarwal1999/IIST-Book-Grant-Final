@@ -1,0 +1,104 @@
+<script>
+
+        function rvalidate()
+        {
+            
+    
+            var mobile=document.forms["Register-form"]["Mobile-No"];;
+
+            if(mobile.length<10)
+            {
+                window.alert("Not a valid mobile number of 10 digits");
+            mobile.focus();
+            return false;
+            }
+        
+        
+        }
+        
+        
+            </script>
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body class="background">
+        <div class="container" >
+            <div class="row">
+                <div class="col-sm-6 col-md-12 ">
+                    <img class="logo " style="height:100px; margin-left: 45%;" src="Logo.jpg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <div class="fluid-container login-container">
+                        <form  onsubmit="return rvalidate()" action="register.php" method="POST" name="Register-form">
+                        <div class="row margin-left">
+                                
+                                <div class="col-md-4">
+                                <h6 class="margin-top">Name</h6>
+                                <input name="Name" type="text" class="login-field" required>
+                                
+                                </div>
+                        </div>
+                        <div class="row margin-left">
+                                
+                                <div class="col-md-4">
+                                <h6 class="padding">IIST ID</h6>
+                                <input name="ID" type="text" class="login-field" required>
+                                
+                                </div>
+                        </div>
+                        <!-- <div class="row margin-left">
+                                
+                                <div class="col-md-5">
+                                <h6 class="padding">Email</h6>
+                                <input name="Email" type="text" class="login-field" required>
+                                
+                                </div>
+                        </div>
+                        <div class="row margin-left">
+                                
+                                <div class="col-md-5">
+                                <h6 class="padding">Mobile-No</h6>
+                                <input name="Mobile-No" type="text" class="login-field" required>
+                              
+                                </div>
+                        </div> -->
+                        <!-- <div class="row margin-left">
+                                
+                                <div class="col-md-4">
+                                <h6 class="padding">Password</h6>
+                                <input name="Password" type="password" class="login-field" required>
+                               
+                                </div>
+                        </div>
+                        <div class="row margin-left">
+                                
+                                <div class="col-md-5">
+                                <h6 class="padding">Re-Password</h6>
+                                <input name="RPassword" type="password" class="login-field"
+                                required>
+                                
+                                </div>
+                        </div> -->
+                        
+                        
+
+                        <div class="row margin-left" style="padding-bottom: 30px;">
+                                
+                                <div class="col-md-4">
+                                <input name="Register" value="Submit" type="submit" class="btn btn-primary login-button">
+                                
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

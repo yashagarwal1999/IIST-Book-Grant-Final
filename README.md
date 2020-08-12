@@ -71,17 +71,6 @@ Folders and files
 21.	view-request-staff.php:  To view requests from dashtry.php
 
 
-Parts Left to be done:
-1.	Add discuss button for everyone above library staff instead of reject.
-2.	Generate reports and statistics.
-3.	Clear session data on logout.
-4.	Check on client side book grant request add date is between sem start and end date on client side. 
-in dashboard.php (add checking code here)
- $("[href='#Add-Book']").click(function(){
-5.	Instead of just updating sem start and end date for library staff make a provision for them to insert new semester in tbl_lib_semester.
-6.	Create a procedure for admin block that changes the status of activation from NA to A in tbl_lib_account after eglibility criteria is met.
-7.	Add indexes to speed up queries.
-
 
 
 

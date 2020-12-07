@@ -104,21 +104,10 @@ if($connection)
               }
 
           }
-        //   else{
-        //     $_SESSION['User']=$_POST['Username'];
-        //     $_SESSION['FromLogin']=1;
-        //     $_SESSION['Role_id']=$role;
-        //     $_SESSION['Role_name']=$str["Role_name"];
-        //     if(isset($_SESSION['User'])){
-        //         $connection->close();
-        //         header('Location:dashboardS.php');
-        //        }
-
-        //   }
-       
+        
 
         }
-        // echo "logged-in<br>";
+        
        
         
     }
@@ -130,7 +119,7 @@ if($connection)
 
 }
 else {
-    // die('Connection error try again'.$connection->connect_error);
+    
     echo 'Error in session.';
     $connection->close();
     header("Location:index.php?Empty=Error In connection");

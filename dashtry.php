@@ -19,7 +19,7 @@ header("Location:index.php?Empty=Invalid Login");
         <script src="application/jquery.min.js"></script>
         <script src="application/popper.min.js"></script>
         <script src="application/bootstrap.min.js"></script>
-        <!-- <script src="js/logout.js"></script> -->
+      
         <script src="js/view-libst.js"></script>
         <script>
         $(document).ready(function(){
@@ -31,7 +31,7 @@ header("Location:index.php?Empty=Invalid Login");
 });
         function submit_date()
         {
-            // alert('hiii');
+            
              var x=$('#start-date').val();
              if(x.length==0)
              {
@@ -89,9 +89,7 @@ header("Location:index.php?Empty=Invalid Login");
    
             
 <ul class="nav nav-tabs flex-column  border">
-                    <!-- <li class="nav-item ">
-                                <a  class="nav-link nav-link-color " data-toggle="tab" href="#Add-Book">Add Book</a>
-                        </li> -->
+                   
                     <li class="nav-item"><a  class="nav-link nav-link-color " data-toggle="tab" href="#PENDING"> PENDING Request</a></li>
                         
                         
@@ -226,19 +224,7 @@ header("Location:index.php?Empty=Invalid Login");
       </div>
       
 
-<!-- 
-        <div id="View-All" class="tab-pane fade in   " style="overflow:auto;">
-          
-            <p id="Not-found5">No  Request Records found</p>
-            
-            <div id="content5">
-            
-            </div> -->
-            <!-- <div data-role="content" id="Div1">
-    <div id="accordion" data-role="collapsible-set"/>
-</div>
 
-        </div> -->
 
 </div>
 </div>

@@ -107,8 +107,7 @@ $details=$res37->fetch_object();
 //***********************************find sub coverage latest details */
 $convert_cats=explode('#',$book->borrow_category_id);
 $convert_cats=array_filter($convert_cats);
-// $convert_cats=explode('#','2#');
-// print_r($convert_cats);
+
 
 //*********************************** convert cats has user shown cats see if borrow id ## is present */
 $conversion_amount_sum_array=array();
@@ -122,7 +121,7 @@ if(count($convert_cats)>0){
      where x.cat_id_1 in ($All_cats_possible) 
     and x.cat_id_2='".$details->category_id."' and y.book_cat_id=x.cat_id_1 
      and x.status_of_activation='ACTIVE' and x.sem_id='".$book->sem_id."' order by x.order_sequence";
-    // print_r($query37);
+    
     
      $res37=$connection->query($query37);
     
@@ -136,12 +135,7 @@ while($temp=$res37->fetch_object())
 {
     $convert_cats[]=$temp;
 }
-//0=>category id
-//1=>total available balance
-// print_r($convert_cats);
-// echo 'heyyyyyyyyyyyyyyyyyyyyyy';
 
-// yash($convert_cats);
 
 
 
@@ -157,12 +151,10 @@ if(!$res37)
     die($connection->error);
 }
 $category=$res37->fetch_object();
-// yash($category);
+
 //*********************************************Get the category of the book with max amount */
 
 
-// $query37="Select * from tbl_lib_user_category where user_id='".$book->user_id."' and 
-// sem_id='".$book->sem_id."' and book_cat_id='".$category->book_cat_id."'";
 $query37="Select x.conversion_done,x.book_cat_id,y.category_name,x.book_id,x.approved_amount from tbl_lib_user_category as x,
 tbl_lib_book_category as y where x.user_id='".$book->user_id."' and 
 x.sem_id='".$book->sem_id."' and x.book_cat_id=y.book_cat_id and x.sem_id=y.sem_id and y.status_of_activeness='ACTIVE'
@@ -185,21 +177,20 @@ else{
         $history_spend[]=$temp;
         $amount+=$temp->approved_amount;
     }
-    // yash($history_spend);
-    // yash($amount);
+   
 
 }
 //******************************Find the history of the user for this category and store sum in amount */
 
 /* **********************************Excess */
  $excess=$bill->amount-($category->allowed_balance-$amount);
-//  yash($excess);
+
  if($excess>0)
  {
-    //  yash($convert_cats);
+    
     foreach($convert_cats as $c)
     {
-        // echo $c."<br>";
+        
         $query40="Select y.allowed_balance,
         (y.allowed_balance-COALESCE(sum(x.approved_amount),0)) as final
         from tbl_lib_user_category as x,
@@ -208,24 +199,21 @@ else{
          and x.sem_id='".$book->sem_id."' 
          and y.sem_id='".$book->sem_id."' and y.book_cat_id='".$c->cat_id_1."' and y.status_of_activeness='ACTIVE';
          ";
-        //  echo $query40;
+        
         $res40=$connection->query($query40);
         if(!$res40){die($connection->error);}
         $temp_array=array();
         $tempz=$res40->fetch_object();
-        // yash($tempz);
+        
         if($tempz->final==null){$tempz->final=0;}
-        //0=>difference amount
-        //1=>total allowed bal
-        //2=>cat name
-        //3=>amount borrowed
+        
         $conversion_amount_sum_array[$c->category_name][]=$tempz->final;
         $conversion_amount_sum_array[$c->category_name][]=$tempz->allowed_balance;
         $conversion_amount_sum_array[$c->category_name][]=$c->category_name;
         
         $amt_borrow+=$tempz->final;
         $excess=$excess-$tempz->final;
-        // yash($amt_borrow);
+        
         if($excess>=0)
         $conversion_amount_sum_array[$c->category_name][]=$tempz->final;
         else
@@ -236,19 +224,17 @@ else{
         if($excess<=0){$excess=0;break;}
     
         
-        // echo 'hey';print_r($amt_borrow);
-        // $conversion_amount_sum_array[]=get_amount_for($c->cat_id_1,$book->user_id,$book->sem_id,$book->book_id);
+        
+        
     }
  }
-// yash('history');
-// yash($history_spend);
+
 
 $conversion_record=array();
-// yash($category);   
+
 
 /***************************************** */
-// if($is_pending==0)
-// {
+
     $flag=0;
     
     foreach($history_spend as $h)
@@ -261,7 +247,7 @@ $conversion_record=array();
     }
     if($flag==1)
     {
-        // $query41="Select * from tbl_lib_book_conversion_record where book_id='".$book->book_id."' ";
+      
         $query41="Select * from tbl_lib_book_conversion_record where user_id='".$book->user_id."' ";
         $res41=$connection->query($query41);
         if(!$res41){echo 'Not found';}
@@ -274,14 +260,14 @@ $conversion_record=array();
             $tempx[]=$temp;
         }
         
-        // yash($tempp);
+      
         if(count($conversion_cats)>0){
             $tempp=join(',',$conversion_cats);
         $query41="select y1.category_name as c1 ,y2.category_name as c2 from tbl_lib_book_category as y1, 
         tbl_lib_book_category as y2,tbl_lib_book_conversion as z where z.conversion_id in ($tempp) and
         y1.book_cat_id=z.cat_id_1 and y2.book_cat_id=z.cat_id_2
         " ;
-        // yash($query41);
+        
         $res41=$connection->query($query41);
         if(!$res41)die($connection->error);
         $i=0;
@@ -292,12 +278,12 @@ $conversion_record=array();
             $conversion_record[$i][]=$tempx[$i]->amount_borrowed;
             $i++;
         }
-        // yash($conversion_cats);
+        
         $tempx=array();
             
         }
         
-        // yash($conversion_record);
+        
 
         }
         
@@ -320,8 +306,7 @@ $conversion_record=array();
 
 
 
-// echo $amount;
-// print_r($history_spend);
+
 
 //****************************check basic egilibilty of amount without the conversion */
 $is_eligible='NOT Eligible';
@@ -335,11 +320,7 @@ if(!$res37)
 $sem_name=$res37->fetch_object();
 
 $resubmit=array();
-// if($book->first_resubmit_id==null || is_null($book->first_resubmit_id)){}
-// else{
-    // '<td><a href="'.$bill_loc.'" target="_blank">'.'View'.'</a></td>'.
-    // '<td><a href="'+$bill_loc+'" download><button class="button">Download</button></a><br></td>';
-// }
+
 
 //********************************find the next card for resubmit if resubmitted */
 if($resubmitflag==1)
@@ -348,18 +329,18 @@ if($resubmitflag==1)
     x.Remarks,y.User_name,x.book_id  from tbl_lib_resubmit as x,tbl_user as y
      where x.book_id='".$book->book_id."' and y.User_id=x.faculty_id";
     $res37=$connection->query($query37);
-    // print_r($query37);
+    
     while($temp=$res37->fetch_object())
     {
         $resubmit[]=$temp;
-        // print_r($temp);
+        
     }
 }
 
 function getaddr($x)
 {
     $F=scandir($x);
-// print_r($files);
+
 $ANS=$x.$F[2];
 return $ANS;
 }
@@ -371,12 +352,7 @@ function yash($p)
     print_r($p);
     echo '<br>*****';
 }
-// function get_amount_for($x,$u,$s,$b)
-// {
-  
-//     // return ($res40->fetch_object())->final;
 
-// }
 ?>
 
 
@@ -389,9 +365,7 @@ function yash($p)
         <script src="application/jquery.min.js"></script>
         <script src="application/popper.min.js"></script>
         <script src="application/bootstrap.min.js"></script>
-        <!-- <script src="js/logout.js"></script>
-        <script src="js/view-libst.js"></script>
-        <script src="js/change-sem-dates.js"></script> -->
+    
 
         <script>
 
@@ -435,9 +409,9 @@ function yash($p)
             var btn_id;
        function submit()
        {
-        // alert("Yes clicked"+btn_id);
+        
         var remark=$('#Remarks').val();
-        // alert('remarks'+remark);
+        
         var status;
         switch(btn_id)
         {
@@ -445,17 +419,17 @@ function yash($p)
             case 'Reject':status='REJECTED';break;
             case 'Resubmit':status='RESUBMIT';break;
         }
-        // alert(status);
+        
         var book_id=<?php echo $book->book_id ?>;
-        // alert(book_id);
+        
         var amount=<?php echo $bill->amount; ?>;
-       // alert(amount);
+       
         var user=<?php echo $book->user_id ?>;
         var sem=<?php echo $book->sem_id;?>;
         var catid=<?php echo $category->book_cat_id;  ?>;
         var borrow=<?php echo $lets_borrow; ?>;
         var  borrow_details=<?php echo json_encode($conversion_amount_sum_array);?>;
-        // var obj=JSON.parse(borrow_details)
+        
         var total=<?php echo max(($category->allowed_balance-$amount),0) ?>;
         console.log(borrow_details);
         $.post('php/record-status.php',{Total_amount:total
@@ -496,7 +470,7 @@ else{
                    </tr></thead>';
                    foreach($conversion_record as $h)
                 {
-                    // if($is_pending==0){
+                    
                         echo '<tr>';
                     echo '<td>'.$h[0].'</td>';
                     echo '<td>'.$h[1].'</td>';
@@ -522,11 +496,11 @@ else{
        function History()
        {
            count++;
-        //    console.log(count);
+        
            if(count%2==0)
            {
             $('#content-history').empty();
-           // $('#content-history').append(x);
+           
            }
            else{
             var x=`<?php
@@ -546,7 +520,7 @@ else{
                     $pp=0;
                 foreach($history_spend as $h)
                 {
-                    // if($is_pending==0){
+                    
                         echo '<tr>';
                     echo '<td>'.$h->approved_amount.'</td>';
                     echo '<td>'.$h->category_name.'</td>';
@@ -604,13 +578,11 @@ var x=`<?php
            $(document).ready(function(){
             if(x!=y)
            {
-            //    alert(x+" "+y);
+            
             var sub='<?php echo $details->subject_coverage;?>';
                $.post('php/change-category.php',{Sub:sub,Book_id:bk,cat_id:x}).done(function(data){
                 alert(data);
-                // console.log(data);
-                // alert('heyyy');
-                //location.reload(true);
+                
                });
                
            }
@@ -635,18 +607,18 @@ var x=`<?php
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+      
       <div class="modal-header">
         <h4 class="modal-title">Are you Sure?</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
-      <!-- Modal body -->
+      
       <div class="modal-body">
        Remarks <input type="text" name="Remarks" id="Remarks"/>
       </div>
 
-      <!-- Modal footer -->
+      
       <div class="modal-footer">
       <button type="button" onclick="submit()" class="btn btn-success" data-dismiss="modal">YES</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
@@ -657,10 +629,7 @@ var x=`<?php
 </div>
         <div class="container">
         <?php
-        // yash($amt_borrow);
-        // yash($category->allowed_balance);
-        // yash($amount);
-        // yash($bill->amount);
+        
         echo '<br><div class="row"><div class="col-4">
         <button onclick="now(this.id)" id="Approve" class="btn btn-success" data-target="#myModal" data-toggle="modal">Approve</button></div>
         <div class="col-4"><button onclick="now(this.id)" id="Reject" class="btn btn-danger" data-target="#myModal" data-toggle="modal">Reject</button></div>';
@@ -727,7 +696,7 @@ var x=`<?php
                 $amount_sanction_by_lib_staff+=$h->approved_amount;
             }
         }
-        // yash($history_spend);
+        
         if($amount_sanction_by_lib_staff!=0)
         echo '<td>'.$amount_sanction_by_lib_staff.' </td>';
         else echo '<td>'.'Yet to approve'.' </td>';
@@ -779,8 +748,7 @@ var x=`<?php
         
         }
         
-        // $excess=$bill->amount-$category->allowed_balance-$amount;
-        // yash($conversion_amount_sum_array);
+
         if($is_pending==1){
             $excess=$bill->amount-($category->allowed_balance-$amount);;
             foreach($conversion_amount_sum_array as $c)
@@ -799,13 +767,12 @@ var x=`<?php
 
         }
         else{
-            // yash($history_spend);
-            // yash(gettype($history_spend));
+          
             $sum=0;
             $sum_max=0;
             foreach($history_spend as $c)
             {
-                // yash(gettype($c));
+                
                 if($c->book_id==$book->book_id)
                 {
                     $query37="select category_name,allowed_balance from 
@@ -876,7 +843,7 @@ var x=`<?php
         echo '</table></div></div></div><br>';
 
         if($resubmitflag==1){
-            // print_r($resubmit);
+            
 
             if(count($resubmit)>1){
 
@@ -899,7 +866,7 @@ var x=`<?php
                 foreach($resubmit as $r)
                 {
                     
-            // echo '<h3 class="card-title">Title: '.$r->title.'</h3><br>';
+            
             echo '<tr>';
             echo '<td>'.$r->title.'</td>';
             echo '<td>'.$r->author.'</td>';
@@ -922,7 +889,7 @@ var x=`<?php
         x.details_added,y.category_name from tbl_lib_faculty_book as x,tbl_lib_book_category as y,
         tbl_user as z where book_id='".$book->book_id."'
          and y.book_cat_id=x.category_id and x.faculty_id=z.User_id ";
-        //  print_r($query37);
+        
         $res37=$connection->query($query37);
         if(!$res37)
         {

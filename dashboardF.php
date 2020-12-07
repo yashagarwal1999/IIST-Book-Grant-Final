@@ -16,24 +16,14 @@ header("Location:index.php?Empty=Invalid Login");
     <head>
         <link rel="stylesheet" href="application/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- <link rel="stylesheet" href="accordian/jquery-ui.css"> -->
-        <!-- <script type="text/javascript" src="/test/wp-content/themes/child/script/jquery.jcarousel.min.js"></script> -->
-        <!-- <script type="text/javascript" src="/Scripts/jquery-3.1.1.min.js"></script>      
-<script type="text/javascript" src="/Scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>  -->
-<!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+       
         <script src="application/jquery.min.js"></script>
         <script src="application/popper.min.js"></script>
         <script src="application/bootstrap.min.js"></script>
-        <!-- <script src="js/add-book.js"></script>
-        <script src="js/view-last.js"></script>
-        <script src="js/view-all.js"></script> -->
+        
 
         <script src="js/faculty.js"></script>
-        <!-- <script src="js/logout.js"></script> -->
-        <!-- <script src="js/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="jquery-ui.css"> -->
-        <!-- <script src="accordian/jquery-1.12.4.js"></script> -->
-  <!-- <script src="accordian/jquery-ui.js"></script> -->
+ 
     <script >
     
     $(document).ready(function(){
@@ -84,9 +74,9 @@ header("Location:index.php?Empty=Invalid Login");
         else{
             var a=["APPROVED","REJECTED","RESUBMIT" ];
             var remark=document.getElementById("remark"+arr[0]).value;
-            // alert(remark);
+            
             var book_cat_id=document.getElementById("select"+arr[0]).value;
-            // alert(book_cat_id);
+           
             console.log(remark);
             $.submit(book_cat_id,arr[0],remark,a[arr[1]-1],subject);
         }
@@ -96,11 +86,10 @@ header("Location:index.php?Empty=Invalid Login");
 
 
 
-        <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
+    
     </head>
     
-    <!-- <body style="background-color:rgba(192, 192, 192, 0.959);"> -->
+  
                 <body class="bg-dark">   
 
         
@@ -125,9 +114,7 @@ header("Location:index.php?Empty=Invalid Login");
    
             
                     <ul class="nav nav-tabs flex-column  border">
-                    <!-- <li class="nav-item ">
-                                <a  class="nav-link nav-link-color " data-toggle="tab" href="#Add-Book">Add Book</a>
-                        </li> -->
+                    
                     <li class="nav-item"><a  class="nav-link nav-link-color " data-toggle="tab" href="#View-Requests">View Active Request</a></li>
                         
                         
@@ -203,11 +190,7 @@ header("Location:index.php?Empty=Invalid Login");
             <div id="content5">
             
             </div>
-            <!-- <div data-role="content" id="Div1">
-    <div id="accordion" data-role="collapsible-set"/>
-</div>
-
-        </div> -->
+         
 
 </div>
 </div>

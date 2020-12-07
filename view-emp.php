@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('php/mysqli.php');
-// echo $_POST['Status'];
+
 if(isset($_POST['Status']))
 {
     $can_resubmit=0;
@@ -22,16 +22,14 @@ if(isset($_POST['Status']))
     {
         $book_ids[]=$temp->book_id;
     }
-    // yash($book_ids);
+    
     //********************************************************* */
-    // yash($_SESSION['Role_id']);
+    
     $book_details=array();
     $not_found=0;
     if(count($book_ids)==0){
         $not_found=1;
-       // echo 'nt';
-        // exit();
-       // die('NO books found');
+      
 
     }
     else{
@@ -57,7 +55,7 @@ if(isset($_POST['Status']))
     $users=join(',',$users);
     $sems=join(',',$sems);
     $bills=join(',',$bills);
-    // yash($book_details);
+   
 
     $query52="Select User_id,User_name from tbl_user where User_id in ($users) ";
     $res52=$connection->query($query52);
@@ -67,7 +65,7 @@ if(isset($_POST['Status']))
     {
         $users[$temp->User_id][]=$temp->User_name;
     }
-    // yash($users);
+    
     $query52="Select sem_id,sem_details from tbl_lib_semester where sem_id in ($sems) ";
     $res52=$connection->query($query52);
     if(!$res52)die($connection->error);
@@ -77,7 +75,7 @@ if(isset($_POST['Status']))
     {
         $sems[$temp->sem_id][]=$temp->sem_details;
     }
-    // yash(array("yash"=>"rules"));
+    
    
     $query52="Select bill_id,amount from tbl_lib_bills where bill_id in ($bills) ";
     $res52=$connection->query($query52);
@@ -87,7 +85,7 @@ if(isset($_POST['Status']))
     {
         $bills[$temp->bill_id][]=$temp->amount;
     }
-    // yash($bills);
+    
 $sanctioned=array();
 $query52="Select book_id,sum(approved_amount) as final from tbl_lib_user_category where book_id in ($books_ids_str) group by(book_id) ";
 $res52=$connection->query($query52);
@@ -96,7 +94,7 @@ while($temp=$res52->fetch_object())
 {
     $sanctioned[$temp->book_id][]=$temp->final;
 }
-// yash($book_details);
+
 echo '<div class="table-responsive ">
                    <table class="table table-striped table-bordered" style=" border:2px solid black">
                   <thead> <tr>
@@ -110,8 +108,7 @@ echo '<div class="table-responsive ">
                    </tr></thead>';
                    $counter=1;
                    //0=>Book-id 1=>user id  2=>sem id 3=>bill id
-                //    yash($sanctioned);
-                //    yash($book_details);
+              
                    $final=array();
                    foreach($book_details as $b){
                 $final[$b[1]][0]='';
@@ -139,10 +136,7 @@ echo '<div class="table-responsive ">
                 $f[2][$x-1]='=';
                 $f[2]=$f[2].strval($f[3]);
                }
-            //    yash('final');
-            //     yash($final);
-// yash('yash');
-// yash($sems);
+           
 foreach($final as $b){
 echo '<tr>';
 echo '<td>'.$counter++.'<input name="check"  type="checkbox" id="'.$b[5].'">
@@ -166,7 +160,7 @@ echo '</tr>';
 }
 
 echo '</table></div>';
-// yash($sanctioned);
+
 }
 if($not_found==1)
 {
@@ -202,7 +196,7 @@ function initial($can_resubmit)
 
     </div>';
 }
-// yash($final);
+
 $connection->close();
 
 function no_books()
@@ -320,7 +314,7 @@ $.submit=function()
     var selected=[];
     for(var i=0;i<arr.length;i++)
     {
-        // selected.push(keyval[arr[i]]);
+        
         for(var j=0;j<keyval[arr[i]].length;j++)
         {
             selected.push(keyval[arr[i]][j]);
@@ -357,18 +351,18 @@ $.submit=function()
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+      
       <div class="modal-header">
         <h4 class="modal-title">Are you Sure?</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
-      <!-- Modal body -->
+      
       <div class="modal-body">
        Remarks <input type="text" name="Remarks" id="Remarks"/>
       </div>
 
-      <!-- Modal footer -->
+      
       <div class="modal-footer">
       <button type="button" onclick="$.submit()" class="btn btn-success" data-dismiss="modal">YES</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>

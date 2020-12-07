@@ -15,7 +15,7 @@ while($temp=$res31->fetch_object()){
     $data[$temp->book_id][]=$temp;
     $books[]=$temp->book_id;
 }
-// print_r($data);
+
 $rolenames=array();
 $query32="Select Role_id, Role_name from tbl_roles";
 $res32=$connection->query($query32);
@@ -24,10 +24,10 @@ if(!$res32)
     die($connection->error);
 }
 while($temp=$res32->fetch_object()){
-    // $rolenames[]=array($res32->Role_name=>$res32->Role_id);
+    
     $rolenames[$temp->Role_name]=$temp->Role_id;
 }
-// print_r($rolenames);
+
 $books=join(',',$books);
 $query33='';
 if($_POST['Status']=='APPROVED'){
@@ -41,7 +41,7 @@ if($_POST['Status']=='APPROVED'){
         $books[]=$temp->book_id;
 
     }
-    // print_r($books);
+    
     if(count($books)>0)
     {
         $books=join(',',$books);
@@ -56,7 +56,7 @@ if($_POST['Status']=='APPROVED'){
     }
 
   
-    // print_r($query33);
+    
 }
 elseif($_POST['Status']!='ALL'){
 $query33="Select flag_id,book_id,status_of_approval,Remarks,flag_timestamp,role_id from tbl_lib_flag 
@@ -81,7 +81,7 @@ while($temp=$res33->fetch_object())
 $flags[$temp->book_id][]=$temp;
 $books[]=$temp->book_id;
 }
-// print_r('HEYY   ');
+
 if(count($books)==0)
 {
     die('NO  BOOKS FOUND');
@@ -96,23 +96,13 @@ if(!$res33){die($connection->error);}
 $tosend=array();
 while($temp=$res33->fetch_object())
 {
-    // $temp->faculty_id=array_search($temp->faculty_id,$rolenames);
+    
     $tosend['data'][]=$temp;
     $tosend['flags'][]=$flags[$temp->book_id];
 }
 echo json_encode($tosend);
 }
-// $count=count($)
 
-
-
-
-
-
-// if($_POST['Status']=='ALL')
-// {
-//     $query31="Select * from tbl_lib_flag where status_of_approval='".$_POST['Status']."' order by (flag_id) desc";   
-// }
 
 
 $connection->close();

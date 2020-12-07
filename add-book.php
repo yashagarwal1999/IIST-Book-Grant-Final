@@ -70,7 +70,7 @@ else{
                 $flag=0;
                 $first_flag=0;
                
-                    // if($flag==0){
+                    
                             $answer=$result2->fetch_object();
                             $orde=$result2->fetch_object();
                             $query3="Insert into tbl_lib_flag(book_id,status_of_approval,role_id,user_id,next_order_id) values ('".$book_id."','PENDING', '".$answer->role_id."', '".$_POST['faculty_book']."' , '".$orde->order_id."' )";
@@ -82,18 +82,7 @@ else{
                             echo $flag.'X';
                             $flag=$flag+1;
 
-                        // }
-                    // else{
-
-                        // $query3="Insert into tbl_lib_flag(book_id,status_of_approval,role_id) values ('".$book_id."','NOT RECEIVED', '".$answer->role_id."')";
-                        // if($connection->query($query3)==TRUE)
-                        // {
-                        //     echo $flag.'X';
-                        //     $flag=$flag+1;
-                        // }
-        
-                    // }
-                   
+                      
                 
                 $query4="Update tbl_lib_books set first_flag_id='".$first_flag."' where book_id='".$book_id."'";
                 if($connection->query($query4)==TRUE)

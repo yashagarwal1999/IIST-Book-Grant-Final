@@ -9,7 +9,7 @@ echo '<div class="table-responsive ">
                    
                    </tr></thead>';
                    
-                //    print_r($_POST['Book_id']);
+               
                    foreach($_POST['Book_id'] as $p)
                    {
                        echo '<tr>';

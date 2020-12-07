@@ -2,7 +2,7 @@
 
 session_start();
 include('php/mysqli.php');
-// echo 'hey';
+
 require('application/fpdf/fpdf.php');
 $pdf=new FPDF();
 $pdf->AddPage();

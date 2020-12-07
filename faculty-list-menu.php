@@ -1,10 +1,9 @@
 <?php
-// session_start();
-        // include('php/mysqli.php');
+
         $Faculty="F";
         $query6="Select User_id,User_name,Role_id from tbl_user where Role_id like '%".$Faculty."%'";
         $result=$connection->query($query6);
-       // echo mysqli_num_rows($result);
+       
         echo '<select class="faculty" name="faculty">';
         while($res=$result->fetch_object())
         {
@@ -22,10 +21,9 @@
            echo "$res->User_name" ;
            echo "</option>";
           }
-         //  echo "<option value='".$res->User_id."'>'".$res->User_name."' ";
+        
 
         }
         echo '<\select><br>';
-        // die();
-        // $connection->close();
+        
         ?>

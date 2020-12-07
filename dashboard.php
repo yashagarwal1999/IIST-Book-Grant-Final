@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_ACTIVE)
 session_start();
 if(!isset($_SESSION['User']))
 {
-//  header('Location:index.php?Empty=good try');
+
 }
 $_SESSION['Request_count']=3;
 // 
@@ -37,7 +37,7 @@ include('php/mysqli.php');
          </script>
 <?php
   }
-// $connection->close();
+
 
 ?>
 
@@ -55,9 +55,9 @@ include('php/mysqli.php');
         <script src="application/popper.min.js"></script>
         <script src="application/bootstrap.min.js"></script>
         <script src="js/add-book.js"></script>
-        <!-- <script src="js/view-last.js"></script> -->
+        
         <script src="js/view-all.js"></script>
-        <!-- <script src="js/logout.js"></script> -->
+        
         <script src="application/jquery.form.js"></script>
       <script>
       $(document).ready(function(){
@@ -80,10 +80,9 @@ include('php/mysqli.php');
          echo json_encode($tempo)
          ?>';
          obj=JSON.parse(obj);
-        //  alert(obj);
+        
          startdate=obj[0].sem_start_date;
-        //  alert(startdate);
-        //  console.log(startdate);
+      
         });
       });
 
@@ -93,30 +92,23 @@ include('php/mysqli.php');
 
    function SubmitBill(id){
 
-//     document.getElementsByClassName("btn-upload").addEventListener("click", function(event){
-//   event.preventDefault()
-// });
 
-
-    // document.getElementsByName('submit_bill').onclick=fucntion( ){
-
-// alert('heyhyyyyy'+id);
 document.getElementById("f-"+id).addEventListener("click", function(event){
   event.preventDefault()
 });
 var x=".preview-"+id;
 var files="#images"+id;
 var filelist=$(files).val();
-// alert(filelist);
+
 var no="#bill-no-"+id;
 no=$(no).val();
-// alert(no);
+
 var amount="#bill-amount-"+id;
 amount=$(amount).val();
-// alert(amount);
+
 var bdate="#bill-date-"+id;
 bdate=$(bdate).val();
-// alert(bdate);
+
 if(no.length==0 || amount.length==0 || bdate.length==0)
 {
     alert("ALL FIELDS ARE REQUIRED");
@@ -125,7 +117,7 @@ if(no.length==0 || amount.length==0 || bdate.length==0)
 
 if(filelist)
 {
-    // alert('xxx');
+
     $.Upload(x,no,id,amount,bdate);
     
 return false;
@@ -141,23 +133,23 @@ else{
    function RESubmitBill(id)
    {
        
-// alert('heyhyyyyy'+id);
+
 document.getElementById("f-"+id).addEventListener("click", function(event){
   event.preventDefault()
 });
 var x=".preview-"+id;
 var files="#images"+id;
 var filelist=$(files).val();
-// alert(filelist);
+
 var no="#bill-no-"+id;
 no=$(no).val();
-// alert(no);
+
 var amount="#bill-amount-"+id;
 amount=$(amount).val();
-// alert(amount);
+
 var bdate="#bill-date-"+id;
 bdate=$(bdate).val();
-// alert(bdate);
+
 if(no.length==0 || amount.length==0 || bdate.length==0)
 {
     alert("ALL FIELDS ARE REQUIRED");
@@ -166,7 +158,7 @@ if(no.length==0 || amount.length==0 || bdate.length==0)
 
 if(filelist)
 {
-    // alert('xxx');
+
     $.REUpload(x,no,id,amount,bdate);
     
 return false;
@@ -183,16 +175,12 @@ else{
 function resubmit_details(id)
 {
 
-    // alert('finally');
+
     var title=$('#title-'+id).val();
     var author=$('#author-'+id).val();
     var publisher=$('#publisher-'+id).val();
     var facultyId=$('#s-'+id).find(':selected').val();
-    // alert(title);
-    // alert(author);
-    // alert(publisher);
-    // alert(facultyId);
-    // alert(role_id+' R');
+    
     $.post('resubmit.php',{bk_id:id,Title:title,Author:author,Publisher:publisher,FacId:facultyId}).done(function(data){
         alert(data);
     });
@@ -211,7 +199,7 @@ function resubmit_details(id)
         
     </head>
     
-    <!-- <body style="background-color:rgba(192, 192, 192, 0.959);"> -->
+    
                 <body class="bg-dark">   
 
         
@@ -305,13 +293,13 @@ if(!$res39)
     die($connection->error);
 }
 $categories=array();
-// print_r($qeury39);
+
 
 while($temp=$res39->fetch_object())
 {
 $categories[]=$temp;
 echo '<input id="borrow" type="checkbox" name="category" value="'.$temp->cat_id_1.'">';
-// echo '<input type="radio">yash<br>';
+
 echo $temp->category_name.'<br>';
 
 }
@@ -354,13 +342,7 @@ echo $temp->category_name.'<br>';
                         <div id="Logout" class="tab-pane fade in ">
                         
                         </div>
-        <!-- <div id="View-Last" class="tab-pane fade in   ">
-          
-            <p>No latest Request found</p>
-
-
-
-        </div> -->
+      
 
 
         <div id="APPROVED" class="tab-pane fade in   ">
@@ -410,7 +392,7 @@ echo $temp->category_name.'<br>';
       
       <div id="Balance" class="tab-pane fade in   ">
           
-          <!-- <p id="notfound4">Balance Not found</p> -->
+          
           <div id="content4">
           <?php include('php/get-balance.php') ?>
 

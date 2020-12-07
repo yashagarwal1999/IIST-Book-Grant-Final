@@ -20,8 +20,7 @@ header("Location:index.php?Empty=Invalid Login");
         <script src="application/jquery.min.js"></script>
         <script src="application/popper.min.js"></script>
         <script src="application/bootstrap.min.js"></script>
-        <!-- <script src="js/logout.js"></script> -->
-        <!-- <script src="js/view-libst.js"></script> -->
+     
         <script>
         $(document).ready(function(){
             $.redirect=function ()
@@ -60,18 +59,16 @@ header("Location:index.php?Empty=Invalid Login");
    
             
 <ul class="nav nav-tabs flex-column  border">
-                    <!-- <li class="nav-item ">
-                                <a  class="nav-link nav-link-color " data-toggle="tab" href="#Add-Book">Add Book</a>
-                        </li> -->
+                    
                     <li class="nav-item"><a  class="nav-link nav-link-color " data-toggle="tab" href="#PENDING"> PENDING Request</a></li>
-                    <!-- <li class="nav-item"><a target="_blank"  href="view-emp.php"> PENDING Request</a></li> -->
+                    
                         
                         
                         <li class="nav-item"><a  class="nav-link nav-link-color" data-toggle="tab" href="#Approved">Approved Request</a></li>
                         <li class="nav-item"><a  class="nav-link nav-link-color" data-toggle="tab" href="#Rejected">Rejected Request</a></li>
-                        <!-- <li class="nav-item"><a  class="nav-link nav-link-color" data-toggle="tab" href="#Resubmit">Resubmit Request</a></li> -->
+                        
                        
-                        <!-- <li class="nav-item"><a  class="nav-link nav-link-color" data-toggle="tab" href="#Balance">Check Balance</a></li> -->
+                        
                         <li class="nav-item"><a  class="nav-link nav-link-color" onclick="$.redirect()">Logout</a></li>
                     </ul>
                     
@@ -90,7 +87,7 @@ header("Location:index.php?Empty=Invalid Login");
                         </div>
         <div id="PENDING" class="tab-pane fade in   ">
           
-            <!-- <p id="Not-found1">No PENDING Request found</p> -->
+            
             <div id="content1">
             <form target="_blank" action="view-emp.php" method="post">
             <input class="btn btn-primary" type="hidden" name="Status" value="Pending"/>
@@ -104,7 +101,7 @@ header("Location:index.php?Empty=Invalid Login");
 
         <div id="Approved" class="tab-pane fade in   ">
           
-          <!-- <p id="Not-found2">No Approved Request found</p> -->
+         
           <div id="content2">
           <form target="_blank" action="view-emp.php" method="post">
             <input class="btn btn-primary" type="hidden" name="Status" value="Approved"/>
@@ -127,16 +124,7 @@ header("Location:index.php?Empty=Invalid Login");
 
       </div>
 
-      <!-- <div id="Resubmit" class="tab-pane fade in   ">
-          
-          <p id="Not-found4">No Resubmit Request found</p>
-          <div id="content4">
-          
-          </div>
-
-
-      </div> -->
-
+  
 
 </div>
 </div>

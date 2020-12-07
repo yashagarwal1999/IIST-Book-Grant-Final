@@ -34,17 +34,11 @@ if(isset($_FILES['userfile']))
                     $book_req=$temp;
                     $sem_id=$temp->sem_id;
                    
-                    // if($temp->bill_id !=NULL)
-                    // {
-                    //     echo 'Bill Already Uploaded.';
-                    // }
-                    // else{
-            
-                                // echo 'sem'.$sem_id;
+                 
                     $query19="Select * from tbl_lib_flag where flag_id='".$temp->first_flag_id."' and status_of_approval='APPROVED'" ;
                     $res19=$connection->query($query19);
                     if(!$res19){
-                        // echo $_POST['book_id'].'   '.$_SESSION['User'];
+                        
                         echo 'Looks like the Faculty is yet to approve your request Error.Bill not uploaded';
                         $error=1;
                     echo '-'.$error;
@@ -60,14 +54,12 @@ if(isset($_FILES['userfile']))
                     die();
                         }
 
-                        // $_SESSION['Counter']++;
+                       
                         $query20="INSERT INTO tbl_lib_bills(book_id, bill_no, bill_date, amount) values ('".$_POST['book_id']."','".$_POST['BNumber']."','".$_POST['Bdate']."','".$_POST['BAmount']."'); ";
                         $res20=$connection->query($query20);
                         
                         
-                        // echo 'XXX '.$insertid.' <br>XXX';
-                        // echo $_SESSION['Counter'].' <br>';
-                        // print_r($query20);
+                      
                         if(!$res20)
                         {
                             echo 'Error in adding bills Try again '.$connection->error;
@@ -150,7 +142,7 @@ if(isset($_FILES['userfile']))
                         }
                     }
                     $query20="UPDATE tbl_lib_bills SET bill_location='".$loc."' where book_id='".$_POST['book_id']."' and bill_id='".$insertid."'";
-                    // $query20="UPDATE tbl_lib_bills SET bill_location='".$loc."', bill_counter='.$counter.' where book_id='".$_POST['book_id']."' and bill_id='".$insertid."'";
+                 
                     $es20=$connection->query($query20);
                     if(!$res20)
                     {
